@@ -165,3 +165,12 @@ function getModuleByNamespace (store, helper, namespace) {
   }
   return module
 }
+
+
+function mapModuleState(rootModule, moduleName, target) {
+  Object.defineProperty(rootModule, moduleName, {
+    get() {
+      return target.state;
+    }
+  })
+}

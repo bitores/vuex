@@ -278,9 +278,12 @@ function installModule (store, rootState, path, module, hot) {
   }
 
   // set state
-  if (!isRoot && !hot) {
+  if(isRoot) {
+    mapModuleState(store, "root", store._modules["root"])
+  } else if (!hot) {
     const parentState = getNestedState(rootState, path.slice(0, -1))
     const moduleName = path[path.length - 1]
+    mapModuleState(store, path.join('_'), store._modulesNamespaceMap[`${path.join('/')}/`])
     store._withCommit(() => {
       Vue.set(parentState, moduleName, module.state)
     })
