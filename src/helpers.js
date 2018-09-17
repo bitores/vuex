@@ -171,6 +171,9 @@ function mapModuleState(rootModule, moduleName, target) {
   Object.defineProperty(rootModule, moduleName, {
     get() {
       return target.state;
+    },
+    set(val) {
+      Object.assign(target.state, val)
     }
   })
 }
